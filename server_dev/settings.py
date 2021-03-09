@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import pymysql
+pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,6 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'login',
+]
+
+FIELD_ENCRYPTION_KEYS = [ 
+    "f164ec6bd6fbc4aef5647abc15199da0f9badcc1d2127bde2087ae0d794a9a0b" 
 ]
 
 MIDDLEWARE = [
@@ -75,8 +83,13 @@ WSGI_APPLICATION = 'server_dev.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': '192.168.62.128',
+        'NAME': 'server_dev',
+        'USER': 'isms',
+        'PASSWORD': 'qwer',
+        'PORT': '3306',
+        'OPTION': {'charset': 'utf8mb4'},
     }
 }
 
